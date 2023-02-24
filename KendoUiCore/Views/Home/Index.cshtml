@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Kendo UI in ASP.NET CORE</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="col-md-12">
+    <p> Kendo UI Version <strong id="kendoVersion"></strong></p>
+
+    @*Implementing kendoCombobox*@
+    <input id="cmbEmployee"/>
+
+    @* Implementing KendoGrid*@
+
+    <div id="grid"></div>
+</div>
+<script type="text/javascript">
+   $(document).ready(function(){
+       $("#kendoVersion").text(kendo.version);
+       $("#cmbEmployee").kendoComboBox({
+           dataSource:[{EmployeeID:1,EmployeeName:"Deepu"},
+            { EmployeeID: 2, EmployeeName: "Dev"},
+            { EmployeeID: 3, EmployeeName: "Rakesh"},
+            { EmployeeID: 4, EmployeeName: "Achal"},
+            { EmployeeID: 5, EmployeeName: "Rajpal"}],
+
+          placeholder:"Select",
+          dataTextField :"EmployeeName",
+          dataValueField:"EmployeeID",
+          index :0,
+          suggest:true,
+          filter:"contains"
+       });
+
+
+        $("#grid").kendoGrid({
+        dataSource:[
+            {CustomerID:  "1",  ContactName:"Deepu ",   CompanyName:"Soprasteria",            Country :"India"},
+            {CustomerID: "2", ContactName: "Anuj ",   CompanyName: "NetProfitscyberworks",  Country: "India" },
+            {CustomerID: "3", ContactName: "Rajpal ", CompanyName: "Appenentiv",            Country: "India" },
+            {CustomerID: "4", ContactName: "Dev ",    CompanyName: "TCS",                   Country: "India" },
+            {CustomerID: "5", ContactName: "A ",      CompanyName: "ABC",                   Country: "India" },
+            {CustomerID: "6", ContactName: "B ",      CompanyName: "AV",                    Country: "India" },
+            {CustomerID: "7", ContactName: "C ",      CompanyName: "DE",                    Country: "France" },
+            {CustomerID: "8", ContactName: "D ",      CompanyName: "gh",                    Country: "India" },
+            {CustomerID: "9", ContactName: "E",       CompanyName: "TS",                    Country: "Japan" },
+            {CustomerID: "10",ContactName: "F ",      CompanyName: "CS",                    Country: "India" },
+            {CustomerID: "11",ContactName: "G ",      CompanyName: "CS",                    Country: "India" },
+            {CustomerID: "12",ContactName: "H ",      CompanyName: "CS",                    Country: "India" },
+            {CustomerID: "13",ContactName: "I ",      CompanyName: "CS",                    Country: "India" },
+            {CustomerID: "14",ContactName: "G ",      CompanyName: "CS",                    Country: "India" },
+            {CustomerID: "15",ContactName: "H ",      CompanyName: "CS",                    Country: "India" },
+
+
+            ],
+
+            filterable:true,
+            sortable:true,
+            
+            columns: CustomerHelper.GenerateColumns(),
+            editable:false,
+            navigatable:true,
+            selectable:"row"
+        });
+    });
+    var CustomerHelper = {
+        GenerateColumns:function()
+        {
+           return columns = [
+                { field: "CustomerID",   title:"ID",      width:40, editable: false},
+                { field: "ContactName", title: "Name",   width: 60, editable: false},
+                { field: "CompanyName", title: "Company", width: 60, editable: false },
+                { field: "Country",     title: "Country", width: 60, editable: false},
+           ]
+        }
+    }
+</script>
